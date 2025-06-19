@@ -8,6 +8,7 @@ from streamlit_concurrency.demo import (
     to_github_url,
 )
 from streamlit_concurrency import run_in_executor
+import trio
 
 st.markdown(f"""
 A function with `executor='process'` runs in a separate process. This is most helpful for CPU-intensive tasks that can run faster without Python GIL.
@@ -45,10 +46,13 @@ res1: running...
 
 res2: running...
 """)
-    (res1, pid1), (res2, pid2) = await asyncio.gather(
+    (res1, pid1), (res2, pid2), (res3, pid3) = await asyncio.gather(
         transformed_sync(100),
         transformed_sync(200000000),
         # example_func.cpu_intensive_computation_in_process_executor(2000),
+        trio.run_process(
+            example_func.cpu_intensive_computation_in_process_executor, 2000
+        ),
     )
     dest.markdown(f"""
 res1: {res1} computed in process {pid1}

@@ -1,6 +1,7 @@
 # DEV deps
 --editable .
 streamlit==1.44.1
+trio==0.30.0
 # multiprocess==0.70.18
 build==1.2.2.post1
 # typing-extensions==4.12.2
