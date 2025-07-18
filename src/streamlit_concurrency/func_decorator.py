@@ -3,13 +3,12 @@ from typing import (
     Awaitable,
     Callable,
     Literal,
-    Optional,
-    ParamSpec,
     TypeVar,
     Union,
     Coroutine,
     overload,
 )
+from typing_extensions import ParamSpec
 from ._func_cache import CacheConf
 from ._decorator_async import transform_async
 from ._decorator_sync import transform_sync
@@ -23,7 +22,7 @@ class FuncDecorator:
     def __init__(
         self,
         # TODO: this should be named cache_data
-        cache: Optional[CacheConf | dict] = None,
+        cache: Union[CacheConf, dict, None] = None,
         # TODO: support st.cache_resource
         executor: Literal["thread", "process"] = "thread",
         with_script_run_context: bool = False,
@@ -74,7 +73,7 @@ class FuncDecorator:
 
 
 def run_in_executor(
-    cache: Optional[CacheConf | dict] = None,
+    cache: Union[CacheConf, dict, None] = None,
     # TODO: support custom executor
     executor: Literal["thread", "process"] = "thread",
     with_script_run_context: bool = False,

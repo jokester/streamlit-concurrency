@@ -6,7 +6,7 @@ Currently only used for test and demo.
 
 import logging
 import contextlib
-from typing import Iterable
+from typing import Iterable, Optional, Union
 import streamlit.logger as st_logger
 
 logger = logging.getLogger(__name__)
@@ -15,9 +15,10 @@ logger = logging.getLogger(__name__)
 @contextlib.contextmanager
 def create_log_sink(
     level: int = logging.INFO,
-    logger_names: Iterable[str] | None = None,
-    format: str
-    | None = "%(asctime)s %(levelname)s %(threadName)s %(name)s - %(funcName)s: %(message)s",
+    logger_names: Optional[Iterable[str]] = None,
+    format: Union[
+        str, None
+    ] = "%(asctime)s %(levelname)s %(threadName)s %(name)s - %(funcName)s: %(message)s",
     capture_streamlit_log: bool = False,
 ):
     """Attach a log sink to Python root logger or stream to capture LogRecord-s and formatted log lines"""

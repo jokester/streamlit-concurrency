@@ -12,8 +12,8 @@ if TYPE_CHECKING:
 class CacheConf(TypedDict):
     """params for streamlit.cache_data"""
 
-    ttl: float | timedelta | str | None
-    max_entries: int | None
+    ttl: Union[float, timedelta, str, None]
+    max_entries: Union[int, None]
     # not suported. Passing in a value will raise
     # show_spinner: Optional[bool]
     persist: Optional[Union["CachePersistType", bool]]
@@ -40,9 +40,9 @@ def st_cache_data(
 def st_cache_resource(
     func: Callable,
     *,
-    cache: Optional[CacheConf | dict] = None,
+    cache: Union[CacheConf, dict, None] = None,
     persist: Optional[bool] = None,
-    ttl: Optional[Union[float, timedelta]] = None,
+    ttl: Union[float, timedelta, None] = None,
     max_entries: Optional[int] = None,
     hash_funcs: Optional["HashFuncsDict"] = None,
 ) -> Callable:

@@ -3,9 +3,7 @@ from typing import (
     Callable,
     Generic,
     Optional,
-    ParamSpec,
     Protocol,
-    Self,
     Type,
     TypeVar,
     Any,
@@ -13,6 +11,8 @@ from typing import (
     Union,
     overload,
 )
+from typing_extensions import ParamSpec
+from typing_extensions import Self
 from ._streamlit_util import assert_st_script_run_ctx
 import logging
 
@@ -93,7 +93,7 @@ class StateRef(Generic[S]):
 
 @overload  # to infer S from type_
 def use_state(
-    key: str, *, namespace: str | None = None, type_: Type[S], **kwargs: Any
+    key: str, *, namespace: Optional[str] = None, type_: Type[S], **kwargs: Any
 ) -> StateRef[S]: ...
 
 
@@ -101,7 +101,7 @@ def use_state(
 def use_state(
     key: str,
     *,
-    namespace: str | None = None,
+    namespace: Optional[str] = None,
     factory: Optional[Callable[[], S]] = None,
     **kwargs: Any,
 ) -> StateRef[S]: ...
@@ -109,14 +109,14 @@ def use_state(
 
 @overload  # fallback to infer to Any
 def use_state(
-    key: str, *, namespace: str | None = None, **kwargs: Any
+    key: str, *, namespace: Optional[str] = None, **kwargs: Any
 ) -> StateRef[Any]: ...
 
 
 def use_state(
     key: str,
     *,
-    namespace: str | None = None,
+    namespace: Optional[str] = None,
     **kwargs: Any,
 ) -> StateRef[S]:  # type: ignore
     assert_st_script_run_ctx("use_state()")

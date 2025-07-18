@@ -7,11 +7,11 @@ import logging
 
 from typing import (
     Coroutine,
-    Optional,
+    Union,
     TypeVar,
     Callable,
-    ParamSpec,
 )
+from typing_extensions import ParamSpec
 from ._func_util import (
     assert_is_transformable_sync,
     debug_enter_exit,
@@ -34,7 +34,7 @@ def transform_sync(
     func: Callable[P, R],
     *,
     executor: cf.Executor,
-    cache: Optional[CacheConf | dict] = None,
+    cache: Union[CacheConf, dict, None] = None,
     with_script_run_context: bool = False,
 ) -> Callable[P, Coroutine[None, None, R]]:
     """Transforms a *sync* function to do real work in executor

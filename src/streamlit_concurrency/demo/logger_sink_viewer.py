@@ -1,6 +1,6 @@
 import datetime
 import asyncio
-from typing import Iterable
+from typing import Iterable, Optional
 import pandas as pd
 import logging
 from streamlit_concurrency.log_sink import create_log_sink
@@ -13,7 +13,7 @@ async def capture_logs_render_df(
     duration: float = 3,
     update_interval=0.2,
     level=logging.INFO,
-    logger_names: Iterable[str] | None = None,
+    logger_names: Optional[Iterable[str]] = None,
 ):
     deadline = datetime.datetime.now() + datetime.timedelta(seconds=duration)
     with create_log_sink(level=level, logger_names=logger_names) as (records, lines):

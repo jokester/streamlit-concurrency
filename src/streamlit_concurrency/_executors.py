@@ -2,6 +2,7 @@ import functools
 import concurrent.futures as cf
 from typing import Literal
 import threading
+import sys
 
 # import multiprocessing as mp
 # import multiprocess as mps
@@ -26,8 +27,15 @@ def _get_thread_pool_executor() -> cf.Executor:
 
 @functools.lru_cache(maxsize=1)
 def _get_process_pool_executor() -> cf.Executor:
+    args = {}
+
+    if sys.version_info >= (3, 11):
+        # retire executor earlier to be safe
+        args["max_tasks_per_child"] = 4
+
     return cf.ProcessPoolExecutor(
-        max_tasks_per_child=4,  # mp_context=mp.get_context("spawn")
+        **args,
+        # mp_context=mp.get_context("spawn")
     )
 
 

@@ -5,8 +5,11 @@ version = "0.1.1"
 authors = [
     {name = "Wang Guan", email = "momocraft@gmail.com"},
 ]
-dependencies = []
-requires-python = ">=3.12"
+dependencies = [
+    "typing_extensions",
+]
+# python: the same version range as Streamlit
+requires-python = ">=3.09,<3.14"
 readme = "README.md"
 license = {text = "Apache-2.0"}
 

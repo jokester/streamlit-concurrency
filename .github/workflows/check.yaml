@@ -11,20 +11,20 @@ on:
 #   contents: read
 
 jobs:
-  # TODO: matrix on (py x streamlit) versions
-  # matrix:
-  #   python-version: [3.8, 3.9, 3.10, 3.11]
   check:
     name: Run tests
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
 
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
-
+      - uses: astral-sh/setup-uv@v6
       - run: |
-          make deps
+          PYTHON_VER=${{ matrix.python-version }} make deps
 
       - run: |
           make format

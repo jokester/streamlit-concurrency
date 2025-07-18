@@ -1,17 +1,18 @@
 # DEV deps
 --editable .
-streamlit==1.44.1
 trio==0.30.0
+streamlit==1.47.0
 # multiprocess==0.70.18
 build==1.2.2.post1
-# typing-extensions==4.12.2
-ruff
-pur
-pytest==8.3.5
-pytest-asyncio==0.26.0
+typing-extensions==4.14.1
+ruff==0.12.4
+pur==7.3.3
+pytest==8.4.1
+pytest-asyncio==1.1.0
 pytest-mypy-plugins==3.2.0
-pytest-cov==6.1.1
+pytest-cov==6.2.1
 pytest-html==4.1.1
 pytest-watcher==0.4.3
-mypy
+mypy==1.17.0
+pip==25.1.1
 

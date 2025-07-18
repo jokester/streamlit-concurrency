@@ -1,0 +1,17 @@
+# https://docs.streamlit.io/develop/api-reference/configuration/config.toml
+
+[client]
+showErrorDetails = "full"
+
+[logger]
+level = 'debug'
+
+[runner]
+fastReruns = false
+
+[server]
+headless = true
+enableWebsocketCompression = false
+
+[browser]
+gatherUsageStats = false

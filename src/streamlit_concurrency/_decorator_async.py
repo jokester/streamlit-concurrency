@@ -5,13 +5,8 @@ import functools
 import contextlib
 import logging
 
-from typing import (
-    Coroutine,
-    Optional,
-    TypeVar,
-    Callable,
-    ParamSpec,
-)
+from typing import Coroutine, Optional, TypeVar, Callable, Union
+from typing_extensions import ParamSpec
 
 from ._errors import UnsupportedExecutor
 from ._func_util import (
@@ -34,7 +29,7 @@ def transform_async(
     func: Callable[P, Coroutine[None, None, R]],
     *,
     executor: cf.Executor,
-    cache: Optional[CacheConf | dict] = None,
+    cache: Union[CacheConf, dict, None] = None,
     with_script_run_context: bool = False,
 ) -> Callable[P, Coroutine[None, None, R]]:
     """Transforms a *async* function to do real work in executor
