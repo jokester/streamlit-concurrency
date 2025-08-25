@@ -1,6 +1,6 @@
 # streamlit-concurrency
 
-Easier and safer concurrency for streamlit.
+Library for easier and safer concurrency for streamlit.
 
 This library provide 2 APIs:
 
